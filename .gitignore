@@ -6,3 +6,6 @@
 
 # eslint
 .eslintcache
+
+# webpack
+records.json
