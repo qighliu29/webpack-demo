@@ -2,6 +2,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const BabelWebpackPlugin = require('babel-minify-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
 const PurifyCSSPlugin = require('purifycss-webpack');
@@ -244,3 +245,21 @@ exports.setFreeVariable = (key, value) => {
         ],
     };
 };
+
+exports.page = ({
+    path = '',
+    template = require.resolve(
+        'html-webpack-plugin/default_index.ejs'
+    ),
+    title,
+    entry,
+} = {}) => ({
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: `${path && path + '/'}index.html`,
+            template,
+            title,
+        }),
+    ],
+    entry,
+});
