@@ -117,6 +117,8 @@ module.exports = (env) => {
             entry: {
                 app: PATHS.app,
             },
+
+            chunks: ['app', 'manifest', 'vendor'],
         }),
         parts.page({
             title: 'Another demo',
@@ -124,12 +126,13 @@ module.exports = (env) => {
             entry: {
                 another: path.join(PATHS.app, 'another.js'),
             },
+
+            chunks: ['another', 'manifest', 'vendor'],
         }),
     ];
     const config = env === 'production' ?
         productionConfig :
         developmentConfig;
 
-    return pages.map(page => merge(commonConfig, config, page));
-
+    return merge([commonConfig, config].concat(pages));
 };

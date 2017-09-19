@@ -253,12 +253,14 @@ exports.page = ({
     ),
     title,
     entry,
+    chunks,
 } = {}) => ({
     plugins: [
         new HtmlWebpackPlugin({
             filename: `${path && path + '/'}index.html`,
             template,
             title,
+            chunks,
         }),
     ],
     entry,
