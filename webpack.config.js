@@ -35,7 +35,7 @@ const commonConfig = merge([{
     }),
     parts.loadFonts({
         options: {
-            name: '[name].[ext]',
+            name: '[name].[hash:8].[ext]',
         },
     }),
     parts.loadJavaScript({
@@ -55,7 +55,7 @@ const productionConfig = merge([
     parts.loadImages({
         options: {
             limit: 15000,
-            name: '[name].[ext]',
+            name: '[name].[hash:8].[ext]',
         },
     }),
     parts.generateSourceMaps({
@@ -81,6 +81,17 @@ const productionConfig = merge([
         'process.env.NODE_ENV',
         'production'
     ),
+    {
+        output: {
+            chunkFilename: '[name].[chunkhash:8].js',
+            filename: '[name].[chunkhash:8].js',
+        },
+    },
+    {
+        plugins: [
+            new webpack.HashedModuleIdsPlugin(),
+        ],
+    },
 ]);
 
 const developmentConfig = merge([
