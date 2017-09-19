@@ -1,6 +1,9 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
+const BabelWebpackPlugin = require('babel-minify-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const cssnano = require('cssnano');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const webpack = require('webpack');
 
@@ -209,6 +212,24 @@ exports.attachRevision = () => ({
     plugins: [
         new webpack.BannerPlugin({
             banner: new GitRevisionPlugin().version(),
+        }),
+    ],
+});
+
+exports.minifyJavaScript = () => ({
+    plugins: [
+        new BabelWebpackPlugin(),
+    ],
+});
+
+exports.minifyCSS = ({
+    options,
+}) => ({
+    plugins: [
+        new OptimizeCSSAssetsPlugin({
+            cssProcessor: cssnano,
+            cssProcessorOptions: options,
+            canPrint: false,
         }),
     ],
 });
