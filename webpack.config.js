@@ -62,11 +62,16 @@ const productionConfig = merge([
         type: 'source-map',
     }),
     parts.extractBundles([{
-        name: 'vendor',
-    }]),
+            name: 'vendor',
+        },
+        {
+            name: 'manifest',
+            minChunks: Infinity,
+        },
+    ]),
     parts.clean(PATHS.build),
     parts.attachRevision(),
-    parts.minifyJavaScript(),
+    // parts.minifyJavaScript(),
     parts.minifyCSS({
         options: {
             discardComments: {
@@ -91,6 +96,9 @@ const productionConfig = merge([
         plugins: [
             new webpack.HashedModuleIdsPlugin(),
         ],
+    },
+    {
+        recordsPath: path.join(__dirname, 'records.json'),
     },
 ]);
 
