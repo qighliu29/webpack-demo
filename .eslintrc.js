@@ -28,4 +28,7 @@ module.exports = {
     plugins: [
         'react',
     ],
+    globals: {
+        __: true,
+    },
 };
