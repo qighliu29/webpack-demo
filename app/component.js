@@ -1,20 +1,28 @@
-// import styles from './main.css';
+import Worker from 'worker-loader!./worker';
 
-export default (text = 'Hello world') => {
-    const element = document.createElement('div');
-
-    element.innerHTML = text;
-    // element.className = styles.redButton;
-    // element.className = 'pure-button';
-    element.className = 'fa fa-hand-spock-o fa-1g';
-
-    element.onclick = () => {
-        import ('./lazy').then((lazy) => {
-            element.textContent = lazy.default;
-        }).catch((err) => {
-            console.error(err);
-        });
+export default () => {
+    const element = document.createElement('h1');
+    const worker = new Worker();
+    const state = {
+        text: 'foo',
     };
+
+    worker.addEventListener(
+        'message',
+        ({
+            data: {
+                text,
+            }
+        }) => {
+            state.text = text;
+            element.innerHTML = text;
+        }
+    );
+
+    element.innerHTML = state.text;
+    element.onclick = () => worker.postMessage({
+        text: state.text,
+    });
 
     return element;
 };
