@@ -4,6 +4,7 @@
 # production
 /build
 /dist
+/static
 
 # eslint
 .eslintcache
