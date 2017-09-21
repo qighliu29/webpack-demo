@@ -80,6 +80,8 @@ const productionConfig = merge([
         output: {
             chunkFilename: '[name].[chunkhash:8].js',
             filename: '[name].[chunkhash:8].js',
+            // Tweak this to match your GitHub project name
+            publicPath: '/webpack-demo/',
         },
     },
     {

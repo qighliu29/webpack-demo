@@ -19,7 +19,8 @@
     "test:karma": "karma start",
     "test:karma:watch": "karma start --auto-watch --no-single-run",
     "test:jest:watch": "jest --watch",
-    "test:jest": "jest"
+    "test:jest": "jest",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
@@ -44,6 +45,7 @@
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
+    "gh-pages": "^1.0.0",
     "git-revision-webpack-plugin": "^2.5.1",
     "glob": "^7.1.2",
     "html-webpack-plugin": "^2.30.1",
